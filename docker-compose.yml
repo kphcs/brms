@@ -1,0 +1,20 @@
+version: "2"
+services:
+  bpms:
+    image: entando/bpms-mortgage-demo:1.0
+    ports:
+      - 8080:8080
+      - 9990:9990
+      - 9999:9999
+  entando-applicant:
+    image: entando/entando-applicant:4.3.2
+    links:
+      - bpms:bpms
+    ports:
+      - 8081:8081
+  entando-lender:
+    image:  entando/entando-lender:4.3.2
+    links:
+      - bpms:bpms
+    ports:
+      - 8082:8082
